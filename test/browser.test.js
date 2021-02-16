@@ -10,11 +10,12 @@ describe('browser integration', () => {
     }
     const expected = {
       column: 20,
-      line: 15
+      line: 15,
     };
     const actual = act();
     expect(actual).deep.contains(expected);
-    expect(actual.fileName).matches(/^http:\/\/localhost:\d+\/base\/test\/browser.test.js/);
+    expect(actual.fileName).matches(
+      /^http:\/\/localhost:\d+\/base\/test\/browser.test.js/
+    );
   });
 });
-
