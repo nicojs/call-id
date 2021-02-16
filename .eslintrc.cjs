@@ -7,6 +7,7 @@ module.exports = {
   },
   plugins: [
     '@typescript-eslint',
+    'prettier'
   ],
   extends: [
     'eslint:recommended',
@@ -16,11 +17,13 @@ module.exports = {
     'prettier/@typescript-eslint',
   ],
   rules: {
+    'prettier/prettier': 'error',
     // typescript will handle this for us
     'no-undef': 'off',
 
     // I know what I'm doing
     '@typescript-eslint/unbound-method': 'off',
-    '@typescript-eslint/no-explicit-any': 'off'
+    '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/no-var-requires': 'off'
   }
 };
