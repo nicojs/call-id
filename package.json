@@ -7,6 +7,9 @@
     "import": "./dist/index.js",
     "require": "./cjs/index.js"
   },
+  "engines": {
+    "node": ">=10"
+  },
   "scripts": {
     "all": "npm run clean && npm run build && npm run lint && npm run test",
     "clean": "rimraf dist reports cjs",
@@ -15,7 +18,9 @@
     "postbuild": "rollup dist/index.js --file cjs/bundle.cjs --format cjs",
     "tsc:watch": "tsc -w",
     "test": "npm run test:node && npm run test:browser",
-    "test:node": "mocha",
+    "test:node": "if-node-version \"<=10\" npm run test:node:10 && if-node-version \">10\" npm run test:node:gt10",
+    "test:node:10": "mocha --no-config test/node.test.cjs",
+    "test:node:gt10": "mocha",
     "test:browser": "karma start karma.conf.cjs --single-run",
     "test:browser:open": "karma start karma.conf.cjs --no-browsers"
   },
@@ -33,6 +38,7 @@
     "eslint": "^7.20.0",
     "eslint-config-prettier": "^7.2.0",
     "eslint-plugin-prettier": "^3.3.1",
+    "if-node-version": "^1.1.1",
     "karma": "^6.1.1",
     "karma-chai": "^0.1.0",
     "karma-chrome-launcher": "^3.1.0",
