@@ -5,7 +5,18 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "args": ["--colors"],
+      "name": "Attach",
+      "port": 9229,
+      "request": "attach",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "type": "node"
+    },
+    {
+      "args": [
+        "--colors"
+      ],
       "internalConsoleOptions": "openOnSessionStart",
       "name": "Mocha Tests",
       "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
