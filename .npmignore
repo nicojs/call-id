@@ -1,0 +1,13 @@
+/.vscode
+/.github
+tasks
+test
+.editorconfig
+.eslintrc.*
+.gitattributes
+.gitignore
+.mocharc.*
+.prettierrc
+karma.conf.*
+tsconfig.*.json
+tsconfig.json

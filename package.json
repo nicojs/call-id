@@ -17,7 +17,7 @@
     "all": "npm run clean && npm run build && npm run lint && npm run test",
     "clean": "rimraf dist reports test/generated",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx --ignore-path .gitignore",
-    "build": "npm run build:tsc && npm run build:tests && npm run build:cjs",
+    "build": "npm run build:tsc && npm run build:tests && npm run build:cjs && npm run build:browser",
     "build:tsc": "tsc",
     "build:tsc:watch": "tsc -w",
     "build:tests": "node --experimental-modules tasks/generate-tests.mjs",
@@ -35,7 +35,13 @@
     "test:browser": "karma start karma.conf.cjs --single-run",
     "test:browser:open": "karma start karma.conf.cjs --no-browsers"
   },
-  "keywords": ["call site", "stack trace", "caller id", "stacktrace", "callsite"],
+  "keywords": [
+    "call site",
+    "stack trace",
+    "caller id",
+    "stacktrace",
+    "callsite"
+  ],
   "author": {
     "email": "jansennico@gmail.com",
     "name": "Nico Jansen",
@@ -64,6 +70,7 @@
     "mocha": "^8.3.0",
     "prettier": "^2.2.1",
     "rimraf": "^3.0.2",
+    "standard-version": "^9.1.1",
     "typescript": "^4.1.5"
   }
 }
