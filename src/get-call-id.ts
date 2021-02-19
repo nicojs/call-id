@@ -2,7 +2,7 @@ import { CallId } from './call-id.js';
 import { getCallIdStackTrace } from './stack-trace.js';
 import { getCallIdV8 } from './v8.js';
 
-export function getCallId(distance = 1): CallId | undefined {
+export function getCallId(distance = 1): CallId | null {
   if (isV8()) {
     return getCallIdV8(distance + 1);
   } else {
@@ -11,5 +11,5 @@ export function getCallId(distance = 1): CallId | undefined {
 }
 
 function isV8() {
-  return !!Error.captureStackTrace;
+  return typeof Error.captureStackTrace === 'function';
 }

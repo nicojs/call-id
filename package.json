@@ -2,21 +2,30 @@
   "name": "call-id",
   "version": "0.1.0",
   "description": "Get the location from where you're called from.",
-  "main": "./cjs/bundle.cjs",
+  "main": "./dist/cjs/index.cjs",
+  "type": "module",
   "exports": {
-    "import": "./dist/index.js",
-    "require": "./cjs/index.js"
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.cjs"
+    }
   },
   "engines": {
     "node": ">=10"
   },
   "scripts": {
     "all": "npm run clean && npm run build && npm run lint && npm run test",
-    "clean": "rimraf dist reports cjs",
+    "clean": "rimraf dist reports test/generated",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx --ignore-path .gitignore",
-    "build": "tsc",
-    "postbuild": "rollup dist/index.js --file cjs/bundle.cjs --format cjs",
-    "tsc:watch": "tsc -w",
+    "build": "npm run build:tsc && npm run build:tests && npm run build:cjs",
+    "build:tsc": "tsc",
+    "build:tsc:watch": "tsc -w",
+    "build:tests": "node tasks/generate-tests.js",
+    "build:tests:watch": "node tasks/generate-tests.js -w",
+    "build:cjs": "esbuild --bundle dist/esm/index.js --outfile=dist/cjs/index.cjs --format=cjs --external:stack-utils",
+    "build:cjs:watch": "npm run build:cjs -- --watch",
+    "prebuild:watch": "npm run build:tsc",
+    "build:watch": "concurrently \"npm run build:tsc:watch\" \"npm run build:tests:watch\" \"npm run build:cjs:watch\"",
     "test": "npm run test:node && npm run test:browser",
     "test:node": "if-node-version \"<=10\" npm run test:node:10 && if-node-version \">10\" npm run test:node:gt10",
     "test:node:10": "mocha --no-config test/node.test.cjs",
@@ -24,7 +33,6 @@
     "test:browser": "karma start karma.conf.cjs --single-run",
     "test:browser:open": "karma start karma.conf.cjs --no-browsers"
   },
-  "type": "module",
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -35,6 +43,8 @@
     "@typescript-eslint/eslint-plugin": "^4.15.1",
     "@typescript-eslint/parser": "^4.15.1",
     "chai": "^4.3.0",
+    "concurrently": "^5.3.0",
+    "esbuild": "^0.8.47",
     "eslint": "^7.20.0",
     "eslint-config-prettier": "^7.2.0",
     "eslint-plugin-prettier": "^3.3.1",
@@ -48,7 +58,6 @@
     "mocha": "^8.3.0",
     "prettier": "^2.2.1",
     "rimraf": "^3.0.2",
-    "rollup": "^2.39.0",
     "typescript": "^4.1.5"
   }
 }

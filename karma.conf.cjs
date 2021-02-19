@@ -5,7 +5,7 @@ module.exports = function (config) {
     files: [
       { pattern: 'dist/**', type: 'module', included: false },
       { pattern: 'src/**', type: 'module', included: false, watched: false },
-      { pattern: 'test/browser.test.js', type: 'module', included: true }
+      { pattern: 'test/generated/browser.test.js', type: 'module', included: true }
     ],
     reporters: ['mocha'],
     port: 9876,
