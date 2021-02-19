@@ -31,7 +31,8 @@
     "test:node:10": "mocha --no-config test/generated/node.test.cjs",
     "test:node:gt10": "mocha",
     "test:browser": "karma start karma.conf.cjs --single-run",
-    "test:browser:open": "karma start karma.conf.cjs --no-browsers"
+    "test:browser:open": "karma start karma.conf.cjs --no-browsers",
+    "test:browser:safari": "karma start karma.conf.cjs --browsers safari"
   },
   "keywords": [],
   "author": "",
@@ -55,6 +56,7 @@
     "karma-firefox-launcher": "^2.1.0",
     "karma-mocha": "^2.0.1",
     "karma-mocha-reporter": "^2.2.5",
+    "karma-safari-launcher": "^1.0.0",
     "mocha": "^8.3.0",
     "prettier": "^2.2.1",
     "rimraf": "^3.0.2",
