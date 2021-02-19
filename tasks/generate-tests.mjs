@@ -1,8 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-const dirname = path.dirname(new URL(import.meta.url).pathname);
-const testDir = path.resolve(dirname, '..', 'test');
+const testDir = path.resolve('test');
 const templatesDir = path.resolve(testDir, 'templates');
 const outDir = path.resolve(testDir, 'generated');
 const actualTestsFile = path.resolve(testDir, 'tests.js');
