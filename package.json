@@ -1,6 +1,6 @@
 {
   "name": "call-id",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Get the location from where you're called from.",
   "main": "./dist/cjs/index.cjs",
   "type": "module",
