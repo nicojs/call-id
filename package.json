@@ -32,7 +32,7 @@
     "test:node:gt10": "mocha",
     "test:browser": "karma start karma.conf.cjs --single-run",
     "test:browser:open": "karma start karma.conf.cjs --no-browsers",
-    "test:browser:safari": "karma start karma.conf.cjs --browsers safari"
+    "test:browser:safari": "karma start karma.conf.cjs --browsers Safari"
   },
   "keywords": [],
   "author": "",

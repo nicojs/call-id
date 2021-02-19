@@ -31,7 +31,6 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node-version: [10.x, 12.x, 14.x, 15.x]
         # https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
         os: ['macos-11.0', 'macos-latest']
     runs-on: ${{ matrix.os }}
