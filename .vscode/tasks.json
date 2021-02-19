@@ -13,11 +13,13 @@
     },
     {
       "type": "npm",
-      "script": "tsc:watch",
-      "label": "tsc --watch",
+      "script": "build:watch",
+      "label": "build:watch",
       "isBackground": true,
       "group": "build",
-      "problemMatcher": ["$tsc-watch"]
+      "problemMatcher": [
+        "$tsc-watch"
+      ]
     }
   ]
 }
