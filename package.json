@@ -1,6 +1,6 @@
 {
   "name": "call-id",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "description": "Get the location from where you're called from.",
   "main": "./dist/cjs/index.cjs",
   "type": "module",
@@ -22,10 +22,12 @@
     "build:tsc:watch": "tsc -w",
     "build:tests": "node --experimental-modules tasks/generate-tests.mjs",
     "build:tests:watch": "npm run build:tests -- -w",
-    "build:cjs": "esbuild --bundle dist/esm/index.js --outfile=dist/cjs/index.cjs --format=cjs --external:stack-utils",
+    "build:cjs": "esbuild --bundle dist/esm/index.js --outfile=dist/cjs/index.cjs --format=cjs",
     "build:cjs:watch": "npm run build:cjs -- --watch",
+    "build:browser": "esbuild --bundle dist/esm/index.js --outfile=dist/browser/index.js --format=iife --global-name=callId",
+    "build:browser:watch": "npm run build:browser -- --watch",
     "prebuild:watch": "npm run build:tsc",
-    "build:watch": "concurrently \"npm run build:tsc:watch\" \"npm run build:tests:watch\" \"npm run build:cjs:watch\"",
+    "build:watch": "concurrently \"npm run build:tsc:watch\" \"npm run build:tests:watch\" \"npm run build:cjs:watch\" \"npm run build:browser:watch\"",
     "test": "npm run test:node && npm run test:browser",
     "test:node": "if-node-version \"<=10\" npm run test:node:10 && if-node-version \">10\" npm run test:node:gt10",
     "test:node:10": "mocha --no-config test/generated/node.test.cjs",
@@ -33,9 +35,13 @@
     "test:browser": "karma start karma.conf.cjs --single-run",
     "test:browser:open": "karma start karma.conf.cjs --no-browsers"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": ["call site", "stack trace", "caller id", "stacktrace", "callsite"],
+  "author": {
+    "email": "jansennico@gmail.com",
+    "name": "Nico Jansen",
+    "url": "https://github.com/nicojs"
+  },
+  "license": "Apache-2.0",
   "devDependencies": {
     "@types/chai": "^4.2.15",
     "@types/mocha": "^8.2.0",

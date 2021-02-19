@@ -3,7 +3,7 @@ module.exports = function (config) {
     basePath: '',
     frameworks: ['mocha', 'chai'],
     files: [
-      { pattern: 'dist/**', type: 'module', included: false },
+      { pattern: 'dist/browser/index.js', type: 'js', included: true },
       { pattern: 'src/**', type: 'module', included: false, watched: false },
       { pattern: 'test/generated/browser.test.js', type: 'module', included: true }
     ],
