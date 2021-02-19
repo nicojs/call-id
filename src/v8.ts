@@ -14,21 +14,28 @@ class ErrorWithCallSite extends Error {
 function getCallSite(
   from: (...args: any) => any,
   distance: number
-): NodeJS.CallSite {
+): NodeJS.CallSite | null {
   const originalPrepare = Error.prepareStackTrace;
   try {
     Error.prepareStackTrace = ErrorWithCallSite.prepareStackTrace;
     // @ts-expect-error This is really a call site, because of the new `prepareStackTrace` implementation
     const stack: NodeJS.CallSite[] = new ErrorWithCallSite(from).stack;
-    return stack[distance];
+    return stack[distance] ?? null;
   } finally {
     Error.prepareStackTrace = originalPrepare;
   }
 }
 
-function parseEvalOrigin(evalOrigin: string): CallId | null {
+export function getCallIdV8(distance = 0): CallId | null {
+  const callSite = getCallSite(getCallIdV8, distance);
+  return callSite && (tryParseEvalOrigin(callSite) || parseCallSite(callSite));
+}
+
+function tryParseEvalOrigin(callSite: NodeJS.CallSite): CallId | null {
   //"eval at <anonymous> (file:///home/nicojs/github/call-id/test/node.test.js:66:12)"
-  const origin = /.*\(([^)]*):(\d+):(\d+)\)/.exec(evalOrigin);
+  const origin = /.*\(([^)]*):(\d+):(\d+)\)/.exec(
+    callSite.getEvalOrigin() ?? ''
+  );
   if (origin) {
     return {
       fileName: toFileName(origin[1]),
@@ -39,16 +46,11 @@ function parseEvalOrigin(evalOrigin: string): CallId | null {
   return null;
 }
 
-export function getCallIdV8(distance = 0): CallId | null {
-  const callSite = getCallSite(getCallIdV8, distance);
-  const evalOrigin = callSite.getEvalOrigin();
-  if (evalOrigin) {
-    return parseEvalOrigin(evalOrigin);
-  } else {
-    return {
-      column: callSite.getColumnNumber(),
-      line: callSite.getLineNumber(),
-      fileName: toFileName(callSite.getFileName()),
-    };
-  }
+function parseCallSite(callSite: NodeJS.CallSite): CallId | null {
+  //"eval at <anonymous> (file:///home/nicojs/github/call-id/test/node.test.js:66:12)"
+  return {
+    column: callSite.getColumnNumber(),
+    line: callSite.getLineNumber(),
+    fileName: toFileName(callSite.getFileName()),
+  };
 }

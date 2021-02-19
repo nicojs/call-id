@@ -1,4 +1,4 @@
-![CI](https://github.com/nicojs/call-id/workflows/CI/badge.svg)
+[![CI](https://github.com/nicojs/call-id/actions/workflows/ci.yml/badge.svg)](https://github.com/nicojs/call-id/actions/workflows/ci.yml)
 
 # Call ID
 
