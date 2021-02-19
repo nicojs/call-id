@@ -3,10 +3,9 @@ const { getCallId } = require('../..');
 
 // A JS file in order to be sure of the line and column numbers
 describe('node cjs', () => {
-  const fileName = __filename;
-
-
-
+  const FILE_NAME = __filename;
+  const STRICT_EVAL_COLUMNS = true;
+  const LINE_OFFSET = 9;
 
 %TESTS%
 });

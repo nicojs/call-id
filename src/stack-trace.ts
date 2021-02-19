@@ -20,7 +20,7 @@ function tryParseEval(line: string): CallId | null {
   return (
     maybeMatch && {
       column: 0,
-      fileName: maybeMatch[1],
+      file: maybeMatch[1],
       line: parseInt(maybeMatch[2], 10),
     }
   );
@@ -31,7 +31,7 @@ function tryParseNormal(line: string): CallId | null {
   const maybeMatch = stackLineRegex.exec(line);
   return (
     maybeMatch && {
-      fileName: maybeMatch[1],
+      file: maybeMatch[1],
       line: parseInt(maybeMatch[2], 10),
       column: parseInt(maybeMatch[3], 10),
     }

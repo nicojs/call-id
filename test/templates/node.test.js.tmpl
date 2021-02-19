@@ -3,10 +3,9 @@ import { getCallId } from 'call-id';
 
 // A JS file in order to be sure of the line and column numbers
 describe('node esm', () => {
-  const fileName = new URL(import.meta.url).pathname;
-
-
-
+  const FILE_NAME = new URL(import.meta.url).pathname;
+  const STRICT_EVAL_COLUMNS = true;
+  const LINE_OFFSET = 9;
 
 %TESTS%
 });

@@ -3,10 +3,9 @@ const { expect } = chai;
 
 // A JS file in order to be sure of the line and column numbers
 describe('browser', () => {
-  const fileName = import.meta.url;
-
-
-
+  const FILE_NAME = import.meta.url;
+  const STRICT_EVAL_COLUMNS = !!Error.captureStackTrace; // in firefox we don't know the exact column when using `eval`
+  const LINE_OFFSET = 9;
 
 %TESTS%
 });
